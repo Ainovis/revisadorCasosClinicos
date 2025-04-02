@@ -50,8 +50,8 @@ app.get('/api/files/:filename', async (req, res) => {
 // Marcar como correcto
 app.post('/api/correct', async (req, res) => {
   try {
-    const { filename, rating } = req.body;
-    await fileHandler.markAsCorrect(filename, rating);
+    const { filename, rating, notes } = req.body;
+    await fileHandler.markAsCorrect(filename, rating, notes);
     res.json({ success: true });
   } catch (error) {
     res.status(500).json({ error: error.message });
@@ -61,8 +61,8 @@ app.post('/api/correct', async (req, res) => {
 // Enviar corrección
 app.post('/api/correction', async (req, res) => {
   try {
-    const { filename, correctedCase, notes } = req.body;
-    await fileHandler.sendCorrection(filename, correctedCase, notes);
+    const { filename, correctedCase, notes, rating } = req.body;
+    await fileHandler.sendCorrection(filename, correctedCase, notes, rating);
     res.json({ success: true });
   } catch (error) {
     res.status(500).json({ error: error.message });
@@ -72,8 +72,8 @@ app.post('/api/correction', async (req, res) => {
 // Marcar como incompleto
 app.post('/api/incomplete', async (req, res) => {
   try {
-    const { filename, notes } = req.body;
-    await fileHandler.markAsIncomplete(filename, notes);
+    const { filename, notes, rating } = req.body;
+    await fileHandler.markAsIncomplete(filename, notes, rating);
     res.json({ success: true });
   } catch (error) {
     res.status(500).json({ error: error.message });
