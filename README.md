@@ -2,3 +2,7 @@
 
 ## Para reiniciar anotaciones:
  rm -rf data/correcciones/* data/correctas/* data/incompletos/* data/pendientes/*; cp data/reg/*.json data/pendientes/
+
+## Up y stop
+`docker-compose up -d`
+`docker-compose stop`
