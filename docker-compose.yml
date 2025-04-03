@@ -8,8 +8,11 @@ services:
       - "3000:3000"
     volumes:
       - ./data:/app/data
+      - ./.env:/app/.env
     restart: unless-stopped
-
+    environment:
+      - GIT_REPO=Ainovis/revisadorCasosClinicos
+    
   reset-data:
     image: alpine:latest
     volumes:
@@ -17,3 +20,9 @@ services:
     command: >
       sh -c "rm -rf /data/correcciones/* /data/correctas/* /data/incompletos/* /data/pendientes/* && 
             cp /data/reg/*.json /data/pendientes/"
+            
+  branch-info:
+    build: .
+    volumes:
+      - ./data:/app/data
+    command: ["sh", "-c", "cat /app/data/.branch_name || echo 'No branch name found'"]
